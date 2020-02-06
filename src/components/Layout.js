@@ -96,7 +96,7 @@ export default class Layout extends Component {
             </div>
           ) : (
             <div>
-              <p>Choose a Chat</p>
+              <p>Choose channel of people to chat with</p>
             </div>
           )}
         </div>

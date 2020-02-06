@@ -1,5 +1,6 @@
 import React from 'react';
 import { Form, InputGroup, ListGroup } from 'react-bootstrap';
+import {FaSearch} from 'react-icons/fa'
 
 export default class SideNav extends React.Component {
   constructor(props) {
@@ -24,9 +25,7 @@ export default class SideNav extends React.Component {
         <Form onSubmit={this.handleSubmit} noValidate>
           <Form.Group>
             <InputGroup>
-              <InputGroup.Prepend>
-                <InputGroup.Text id='inputGroupPrepend'>@</InputGroup.Text>
-              </InputGroup.Prepend>
+              
               <Form.Control
                 type='text'
                 placeholder='Search user'
@@ -37,6 +36,9 @@ export default class SideNav extends React.Component {
                   this.setState({ reciever: target.value });
                 }}
               />
+              <InputGroup.Append>
+                <InputGroup.Text id='inputGroupPrepend'><FaSearch /></InputGroup.Text>
+              </InputGroup.Append>
             </InputGroup>
           </Form.Group>
         </Form>
