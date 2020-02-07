@@ -11,7 +11,7 @@ export default class App extends Component {
     super(props);
     this.state = {
       user: null,
-      socket: null
+      socket: null,
     };
   }
 
@@ -29,10 +29,11 @@ export default class App extends Component {
 
   addUserToList = user => {
     const { socket } = this.state;
-    socket.emit(USER_CONNECTED, user);
+    socket.emit(USER_CONNECTED, user, this.getLoggedInUsers);
     this.setState({ user });
   };
 
+  
 
   handleSignOut = () => {
     const { socket } = this.state;

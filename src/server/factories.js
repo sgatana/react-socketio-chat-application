@@ -39,12 +39,11 @@ const getTime = date => {
   return moment(date).format('HH:mm');
 };
 
-
-const createUserSession = ({ username = '', socketId= null } = {}) => {
+const createUserSession = ({ username = '', socketId = null } = {}) => {
   return {
     id: uuid(),
     username,
-    socketId,
+    socketId
   };
 };
 

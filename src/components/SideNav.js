@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, InputGroup, ListGroup } from 'react-bootstrap';
-import {FaSearch} from 'react-icons/fa'
+import { FaSearch } from 'react-icons/fa';
 
 export default class SideNav extends React.Component {
   constructor(props) {
@@ -9,11 +9,13 @@ export default class SideNav extends React.Component {
       reciever: ''
     };
   }
+
   handleSubmit = e => {
     e.preventDefault();
     const { reciever } = this.state;
     this.props.onSendMessage(reciever);
   };
+
   render() {
     const { chats, setActiveChat, user } = this.props;
     const { reciever } = this.state;
@@ -25,7 +27,6 @@ export default class SideNav extends React.Component {
         <Form onSubmit={this.handleSubmit} noValidate>
           <Form.Group>
             <InputGroup>
-              
               <Form.Control
                 type='text'
                 placeholder='Search user'
@@ -37,11 +38,14 @@ export default class SideNav extends React.Component {
                 }}
               />
               <InputGroup.Append>
-                <InputGroup.Text id='inputGroupPrepend'><FaSearch /></InputGroup.Text>
+                <InputGroup.Text id='inputGroupPrepend'>
+                  <FaSearch />
+                </InputGroup.Text>
               </InputGroup.Append>
             </InputGroup>
           </Form.Group>
         </Form>
+
         <div>
           <p>Active users</p>
           <ListGroup as='ul' variant='flush'>
@@ -58,7 +62,6 @@ export default class SideNav extends React.Component {
                     as='li'
                     key={chat.id}
                     onClick={() => setActiveChat(chat)}
-                    
                   >
                     <div>
                       <div className='user-list'>
