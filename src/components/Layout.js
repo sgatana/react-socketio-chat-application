@@ -4,6 +4,7 @@ import SideNav from './SideNav';
 import {
   MESSAGE_SENT,
   PUBLIC_CHAT,
+  SEND_TO_USER,
   MESSAGE_RECIEVED,
   PRIVATE_MESSAGE
 } from '../common/events';
@@ -42,6 +43,15 @@ export default class Layout extends Component {
     socket.emit(PRIVATE_MESSAGE, { reciever, sender: user.username });
   };
 
+  sendMessageToLoggedIn = (message, reciever) => {
+    const { socket, user } = this.props;
+    socket.emit(
+      SEND_TO_USER,
+      { sender: user.username, reciever, message },
+      this.sendMessage
+    );
+  };
+
   resetChat = chat => {
     return this.addChat(chat, true);
   };
@@ -70,7 +80,7 @@ export default class Layout extends Component {
   };
 
   render() {
-    const { user, handleSignOut } = this.props;
+    const { user, handleSignOut, socket } = this.props;
     const { chats, activeChat } = this.state;
     return (
       <div className='main'>
@@ -81,24 +91,28 @@ export default class Layout extends Component {
             activeChat={activeChat}
             setActiveChat={this.setActiveChat}
             onSendMessage={this.sendMessageToUser}
+            onSendMessageToLoggedIn={this.sendMessageToLoggedIn}
           />
         </div>
         <div className='content'>
           <Header onSignOut={handleSignOut} user={user} />
-          {activeChat !== null ? (
-            <div className='chat-container'>
-              <Messages messages={activeChat.messages} user={user} />
-              <MessageInput
-                sendMessage={message =>
-                  this.sendMessage(activeChat.id, message)
-                }
-              />
+          <div className='chat-container'>
+            <div ref='content' className='thread-container'>
+              {activeChat && (
+                <Messages messages={activeChat.messages} user={user} />
+              )}
             </div>
-          ) : (
-            <div>
-              <p>Choose channel of people to chat with</p>
-            </div>
-          )}
+            <MessageInput
+              user={user}
+              socket={socket}
+              activeChat={activeChat}
+              sendMessage={message =>
+                this.sendMessage(activeChat.id, message)
+
+              }
+              onSendMessageToLoggedIn={this.sendMessageToLoggedIn}
+            />
+          </div>
         </div>
       </div>
     );

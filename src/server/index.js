@@ -8,7 +8,9 @@ const {
   PUBLIC_CHAT,
   MESSAGE_RECIEVED,
   MESSAGE_SENT,
-  PRIVATE_MESSAGE
+  PRIVATE_MESSAGE,
+  SEND_TO_USER,
+  GET_CONNECTED_USERS
 } = require('../common/events');
 const { createChat, createMessage, createUserSession } = require('./factories');
 
@@ -17,6 +19,7 @@ const port = process.env.PORT || 5000;
 const io = socketio(app);
 
 let loggedInUsers = {};
+let sentMessages = [];
 let publicChat = createChat();
 
 io.on('connection', socket => {
@@ -70,6 +73,22 @@ io.on('connection', socket => {
       socket.to(recieverSocket).emit(PRIVATE_MESSAGE, newChat);
       socket.emit(PRIVATE_MESSAGE, newChat);
     }
+  });
+
+  socket.on(SEND_TO_USER, ({ sender, reciever, message }, cb) => {
+    const newChat = createChat({
+      name: `${reciever}&${sender}`,
+      users: [reciever, sender]
+    });
+    cb(newChat.id, message);
+    const recieverSocket = loggedInUsers[reciever].socketId;
+    socket.to(recieverSocket).emit(PRIVATE_MESSAGE, newChat);
+    socket.emit(PRIVATE_MESSAGE, newChat);
+    sentMessages.push(reciever);
+  });
+
+  socket.on(GET_CONNECTED_USERS, cb => {
+    cb(loggedInUsers);
   });
 });
 
