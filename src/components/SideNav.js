@@ -65,7 +65,7 @@ export default class SideNav extends React.Component {
                   >
                     <div>
                       <div className='user-list'>
-                        <div className='icon'>{icon}</div>
+                        <div className='avatar'>{icon}</div>
                         <div>{chatName}</div>
                       </div>
                       <div>

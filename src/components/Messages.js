@@ -4,7 +4,7 @@ export default class Messages extends Component {
   render() {
     const { messages, user } = this.props;
     return (
-      <div ref='content' className='thread-container'>
+      <div className='thread-container'>
         <div className='thread'>
           {messages.map(message => {
             return (

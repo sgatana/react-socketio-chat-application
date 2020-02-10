@@ -69,6 +69,7 @@ export default class Layout extends Component {
   addMessageToChat = chatId => {
     return message => {
       const { chats } = this.state;
+
       let newChats = chats.map(chat => {
         if (chat.id === chatId) {
           chat.messages.push(message);
