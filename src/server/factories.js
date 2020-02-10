@@ -9,18 +9,23 @@ const getUser = (username, password) => {
   );
 };
 
+// format time
+const getTime = date => {
+  return moment(date).format('HH:mm');
+};
+
 // create message
 
 const createMessage = ({ message, sender }) => {
   return {
     id: uuid(),
-    time: getTime(new Date(Date.now())),
+    time: getTime(new Date()),
     message,
     sender
   };
 };
 
-// create chat
+// create chat, create a public chat /channel
 const createChat = ({
   messages = [],
   username = 'Public',
@@ -32,11 +37,6 @@ const createChat = ({
     messages,
     users
   };
-};
-
-// format time
-const getTime = date => {
-  return moment(date).format('HH:mm');
 };
 
 const createUserSession = ({ username = '', socketId = null } = {}) => {

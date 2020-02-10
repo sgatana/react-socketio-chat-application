@@ -92,30 +92,30 @@ io.on('connection', socket => {
   });
 });
 
-function sendMessageToChat(sender) {
+const sendMessageToChat = sender => {
   return (chatId, message) => {
     io.emit(
       `${MESSAGE_RECIEVED}-${chatId}`,
       createMessage({ message, sender })
     );
   };
-}
+};
 
-function addUserToList(userList, user) {
+const addUserToList = (userList, user) => {
   const newList = Object.assign({}, userList);
   newList[user.username] = user;
   return newList;
-}
+};
 
-function isUserLoggedIn(userList, username) {
+const isUserLoggedIn = (userList, username) => {
   return username in userList;
-}
+};
 
-function removeUser(userList, username) {
+const removeUser = (userList, username) => {
   const newList = Object.assign({}, userList);
   delete newList[username];
   return newList;
-}
+};
 app.listen(port, () => {
   console.log(`socket running on port ${port}`);
 });

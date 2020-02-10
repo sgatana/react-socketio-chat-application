@@ -11,7 +11,6 @@ body {
 /*
 header sytles
 */
-
 .header {
   background-color: #083b7e;
   color: #ffffff;
@@ -27,7 +26,7 @@ header sytles
   margin-right: 15px;
   cursor: pointer;
 }
-
+/* errors styles*/
 .error {
   color: #da0b0b;
   text-align: center;
@@ -44,8 +43,10 @@ side bar sytles
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 10px;
 }
 
+/* login account styles */
 .account {
   height: 100vh;
   margin: auto;
@@ -66,21 +67,26 @@ side bar sytles
   width: 100px;
 }
 
+/* main layout styles*/
 .main {
   height: 100vh;
   display: flex;
 }
+
+/* side bar styles */
 .sidebar {
   border-right: 1px solid #f0f0f0;
   height: 100vh;
   width: 350px;
 }
 
+/* layout content styles */
 .content {
   width: 100%;
   height: 100%;
 }
 
+/* chat container section styles*/
 .chat-container {
   display: flex;
   flex-direction: column;
@@ -103,27 +109,29 @@ side bar sytles
   color: #4d4d5f;
   background: #f0f0f0;
 }
+
 .message-container {
   display: flex;
   justify-content: flex-start;
   min-height: 50px;
   margin: 10px 15px;
-  animation: 0.65s ease-out 0s show;
 }
-.message-container .time {
+.time {
   order: 1;
+  font-size: 14px;
+  font-style: oblique;
 }
-.message-container .data {
+.data {
   order: 2;
   height: 100%;
   margin-left: 25px;
 }
-.message-container .name {
+.name {
   font-size: 0.65em;
   margin-top: 5px;
   text-align: right;
 }
-.message-container .message {
+.message {
   background: #bbb7b7;
   border-radius: 5px;
   border-top-left-radius: 0;
@@ -133,14 +141,7 @@ side bar sytles
   padding: 10px 15px;
   position: relative;
 }
-@keyframes show {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
+
 .message-container .message::before {
   border-bottom-color: transparent;
   border-left-color: transparent;
@@ -176,6 +177,7 @@ side bar sytles
   border-top-right-radius: 0;
   border-top-left-radius: 5px;
 }
+
 .message-container.right .message::before {
   border-top-color: #8020b8;
   border-left-color: #8020b8;
@@ -184,16 +186,22 @@ side bar sytles
   right: -7px;
 }
 
+/* send message form styles*/
 .form {
   display: flex;
   justify-content: space-evenly;
 }
+
+/* display user list styles*/
 .user-list {
   display: flex;
   align-items: center;
 }
 
-.icon {
+/*
+chat avatar styles
+*/
+.avatar {
   margin-right: 15px;
   border: 1px solid #8020b8;
   padding: 5px;
